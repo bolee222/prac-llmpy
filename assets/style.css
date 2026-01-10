@@ -74,7 +74,6 @@ main {
 
 .card {
   border: 2px solid transparent;
-  background: #fff;
   border-radius: 16px;
   padding: 12px;
   box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
@@ -221,6 +220,8 @@ button:disabled {
   border-radius: 12px;
   overflow-x: auto;
   min-height: 120px;
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 
 .message-box {
