@@ -173,20 +173,20 @@ def relationship() -> tuple[str, int]:
             {
                 "role": "system",
                 "content": [
-                    {"type": "text", "text": DEFAULT_RELATIONSHIP_SYSTEM_PROMPT}
+                    {"type": "input_text", "text": DEFAULT_RELATIONSHIP_SYSTEM_PROMPT}
                 ],
             },
             {
                 "role": "user",
                 "content": [
-                    {"type": "text", "text": relationship_input},
+                    {"type": "input_text", "text": relationship_input},
                     {
-                        "type": "image_url",
-                        "image_url": {"url": build_image_data_url(first["filename"])},
+                        "type": "input_image",
+                        "image_url": build_image_data_url(first["filename"]),
                     },
                     {
-                        "type": "image_url",
-                        "image_url": {"url": build_image_data_url(second["filename"])},
+                        "type": "input_image",
+                        "image_url": build_image_data_url(second["filename"]),
                     },
                 ],
             },
@@ -200,11 +200,11 @@ def relationship() -> tuple[str, int]:
         input=[
             {
                 "role": "system",
-                "content": [{"type": "text", "text": JSON_PARSE_PROMPT}],
+                "content": [{"type": "input_text", "text": JSON_PARSE_PROMPT}],
             },
             {
                 "role": "user",
-                "content": [{"type": "text", "text": relationship_text}],
+                "content": [{"type": "input_text", "text": relationship_text}],
             },
         ],
     )
