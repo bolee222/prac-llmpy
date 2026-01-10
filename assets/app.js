@@ -49,6 +49,13 @@ function filterGallery(galleryId) {
   cards.forEach((card) => {
     const isMatch = card.dataset.gallery === galleryId;
     card.hidden = !isMatch;
+    const checkbox = card.querySelector("input[name='selected']");
+    if (checkbox) {
+      checkbox.disabled = !isMatch;
+      if (!isMatch) {
+        checkbox.checked = false;
+      }
+    }
   });
 }
 

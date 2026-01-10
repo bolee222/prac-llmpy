@@ -15,6 +15,10 @@ body.selection-only .selection p {
   display: none;
 }
 
+body.selection-only .gallery-view {
+  display: none;
+}
+
 header {
   max-width: 960px;
   margin: 0 auto 24px;
