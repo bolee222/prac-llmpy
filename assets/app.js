@@ -4,6 +4,13 @@ const promptEl = document.getElementById("prompt");
 const relationshipEl = document.getElementById("relationship");
 const parsedEl = document.getElementById("parsed");
 const diagramEl = document.getElementById("diagram");
+const selectionScreen = document.getElementById("gallery-selection");
+const galleryView = document.getElementById("gallery-view");
+const galleryLabel = document.getElementById("gallery-label");
+const changeGalleryBtn = document.getElementById("change-gallery");
+const resultModal = document.getElementById("result-modal");
+const closeModalBtn = document.getElementById("close-modal");
+const cards = Array.from(document.querySelectorAll(".card"));
 
 function setStatus(message, isError = false) {
   statusEl.textContent = message;
@@ -30,6 +37,37 @@ function resetOutput() {
   relationshipEl.textContent = "";
   parsedEl.textContent = "";
   diagramEl.textContent = "";
+}
+
+function clearSelections() {
+  Array.from(document.querySelectorAll("input[name='selected']")).forEach((input) => {
+    input.checked = false;
+  });
+}
+
+function filterGallery(galleryId) {
+  cards.forEach((card) => {
+    const isMatch = card.dataset.gallery === galleryId;
+    card.hidden = !isMatch;
+  });
+}
+
+function showGallery(galleryId) {
+  filterGallery(galleryId);
+  galleryLabel.textContent = `Gallery ${galleryId}`;
+  selectionScreen.hidden = true;
+  galleryView.hidden = false;
+  setStatus("");
+  clearSelections();
+  resetOutput();
+}
+
+function showSelection() {
+  selectionScreen.hidden = false;
+  galleryView.hidden = true;
+  setStatus("");
+  clearSelections();
+  resetOutput();
 }
 
 async function runRelationship() {
@@ -66,6 +104,9 @@ async function runRelationship() {
     relationshipEl.textContent = data.relationship || "";
     parsedEl.textContent = JSON.stringify(data.parsed, null, 2);
     diagramEl.textContent = data.diagram || "";
+    if (resultModal?.showModal) {
+      resultModal.showModal();
+    }
     setStatus("Done.");
   } catch (error) {
     setStatus("Network error. Please try again.", true);
@@ -78,4 +119,25 @@ Array.from(document.querySelectorAll("input[name='selected']")).forEach(
   (input) => input.addEventListener("change", enforceSelectionLimit)
 );
 
+Array.from(document.querySelectorAll("#gallery-selection [data-gallery]")).forEach(
+  (button) => {
+    button.addEventListener("click", () => {
+      const galleryId = button.dataset.gallery;
+      if (galleryId) {
+        showGallery(galleryId);
+      }
+    });
+  }
+);
+
+changeGalleryBtn?.addEventListener("click", showSelection);
+
+closeModalBtn?.addEventListener("click", () => {
+  if (resultModal?.open) {
+    resultModal.close();
+  }
+});
+
 submitBtn.addEventListener("click", runRelationship);
+
+showSelection();

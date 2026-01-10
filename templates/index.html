@@ -13,43 +13,65 @@
     </header>
 
     <main>
-      <section class="gallery">
-        {% for card in cards %}
-        <label class="card">
-          <input type="checkbox" name="selected" value="{{ card.id }}" />
-          <img src="{{ card.url }}" alt="{{ card.title }}" />
-          <div class="card-body">
-            <h3>{{ card.title }}</h3>
-            <p>{{ card.description }}</p>
+      <section class="selection" id="gallery-selection">
+        <h2>Choose a gallery</h2>
+        <p>Select a gallery to load the corresponding images.</p>
+        <div class="selection-actions">
+          <button type="button" data-gallery="1">Gallery 1</button>
+          <button type="button" data-gallery="2">Gallery 2</button>
+        </div>
+      </section>
+
+      <section class="gallery-view" id="gallery-view" hidden>
+        <div class="gallery-header">
+          <h2 id="gallery-label">Gallery</h2>
+          <button type="button" id="change-gallery" class="ghost">Change Gallery</button>
+        </div>
+        <section class="gallery">
+          {% for card in cards %}
+          <label class="card" data-gallery="{{ card.gallery }}">
+            <input type="checkbox" name="selected" value="{{ card.id }}" />
+            <img src="{{ card.url }}" alt="{{ card.title }}" />
+            <div class="card-body">
+              <h3>{{ card.title }}</h3>
+              <p>{{ card.description }}</p>
+            </div>
+          </label>
+          {% endfor %}
+        </section>
+        <section class="controls">
+          <div class="prompt">
+            <label for="prompt">Prompt</label>
+            <textarea id="prompt" placeholder="Enter the prompt you want to run..."></textarea>
           </div>
-        </label>
-        {% endfor %}
-      </section>
-
-      <section class="controls">
-        <div class="prompt">
-          <label for="prompt">Prompt</label>
-          <textarea id="prompt" placeholder="Enter the prompt you want to run..."></textarea>
-        </div>
-        <button id="submit" type="button">Run Relationship</button>
-        <p id="status" role="status"></p>
-      </section>
-
-      <section class="output">
-        <div>
-          <h2>Relationship Text</h2>
-          <pre id="relationship"></pre>
-        </div>
-        <div>
-          <h2>Parsed JSON</h2>
-          <pre id="parsed"></pre>
-        </div>
-        <div>
-          <h2>Diagram Output</h2>
-          <pre id="diagram"></pre>
-        </div>
+          <button id="submit" type="button">Run Relationship</button>
+          <p id="status" role="status"></p>
+        </section>
       </section>
     </main>
+
+    <dialog id="result-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Relationship Result</h2>
+          <button type="button" class="ghost" id="close-modal">Close</button>
+        </div>
+        <div class="output">
+          <div>
+            <h3>Relationship Text</h3>
+            <div id="relationship" class="message-box" role="note"></div>
+          </div>
+          <div>
+            <h3>Parsed JSON</h3>
+            <pre id="parsed"></pre>
+          </div>
+          <div>
+            <h3>Diagram Output</h3>
+            <pre id="diagram"></pre>
+          </div>
+        </div>
+      </div>
+    </dialog>
 
     <script src="/assets/app.js"></script>
   </body>

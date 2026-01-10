@@ -26,6 +26,35 @@ main {
   gap: 24px;
 }
 
+.selection {
+  background: #fff;
+  padding: 32px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+  text-align: center;
+}
+
+.selection-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.gallery-view {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.gallery-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -99,6 +128,12 @@ button {
   cursor: pointer;
 }
 
+button.ghost {
+  background: transparent;
+  border: 1px solid #cbd5f5;
+  color: #1f2937;
+}
+
 button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
@@ -119,6 +154,16 @@ button:disabled {
   gap: 16px;
 }
 
+.message-box {
+  background: #eff6ff;
+  color: #1e3a8a;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid #bfdbfe;
+  min-height: 120px;
+  white-space: pre-wrap;
+}
+
 .output pre {
   background: #0f172a;
   color: #e2e8f0;
@@ -126,4 +171,30 @@ button:disabled {
   border-radius: 12px;
   overflow-x: auto;
   min-height: 120px;
+}
+
+.modal {
+  border: none;
+  border-radius: 20px;
+  padding: 0;
+  width: min(960px, 90vw);
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.3);
+}
+
+.modal::backdrop {
+  background: rgba(15, 23, 42, 0.45);
+}
+
+.modal-content {
+  padding: 24px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

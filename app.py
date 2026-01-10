@@ -126,6 +126,7 @@ def index() -> str:
         {
             "id": image_id,
             "filename": row["filename"],
+            "gallery": row["filename"].split("-", 1)[0],
             "title": row["title"],
             "description": row["description"],
             "url": build_image_url(row["filename"]),
