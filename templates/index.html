@@ -8,8 +8,14 @@
   </head>
   <body>
     <header>
-      <h1>Image Relationship Explorer</h1>
-      <p>Select two images, add your prompt, and generate a relationship diagram.</p>
+      <div class="header-row">
+        <div>
+          <h1>Image Relationship Explorer</h1>
+          <p>Select two images, add your prompt, and generate a relationship diagram.</p>
+        </div>
+        <a class="link-button" href="/">Choose another gallery</a>
+      </div>
+      <p class="gallery-label">Currently viewing Gallery {{ gallery_id }}</p>
     </header>
 
     <main>
@@ -35,21 +41,33 @@
         <p id="status" role="status"></p>
       </section>
 
-      <section class="output">
-        <div>
-          <h2>Relationship Text</h2>
-          <pre id="relationship"></pre>
-        </div>
-        <div>
-          <h2>Parsed JSON</h2>
-          <pre id="parsed"></pre>
-        </div>
-        <div>
-          <h2>Diagram Output</h2>
-          <pre id="diagram"></pre>
-        </div>
-      </section>
     </main>
+
+    <div class="modal" id="result-modal" aria-hidden="true">
+      <div class="modal-backdrop" data-close></div>
+      <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <header class="modal-header">
+          <h2 id="modal-title">Relationship Result</h2>
+          <button class="modal-close" type="button" data-close aria-label="Close dialog">
+            ×
+          </button>
+        </header>
+        <div class="modal-body">
+          <div class="message-box">
+            <h3>Relationship Text</h3>
+            <p id="relationship"></p>
+          </div>
+          <div class="modal-section">
+            <h3>Parsed JSON</h3>
+            <pre id="parsed"></pre>
+          </div>
+          <div class="modal-section">
+            <h3>Diagram Output</h3>
+            <pre id="diagram"></pre>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script src="/assets/app.js"></script>
   </body>

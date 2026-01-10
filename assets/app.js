@@ -4,6 +4,8 @@ const promptEl = document.getElementById("prompt");
 const relationshipEl = document.getElementById("relationship");
 const parsedEl = document.getElementById("parsed");
 const diagramEl = document.getElementById("diagram");
+const modalEl = document.getElementById("result-modal");
+const closeButtons = modalEl ? modalEl.querySelectorAll("[data-close]") : [];
 
 function setStatus(message, isError = false) {
   statusEl.textContent = message;
@@ -30,6 +32,18 @@ function resetOutput() {
   relationshipEl.textContent = "";
   parsedEl.textContent = "";
   diagramEl.textContent = "";
+}
+
+function openModal() {
+  if (!modalEl) return;
+  modalEl.classList.add("open");
+  modalEl.setAttribute("aria-hidden", "false");
+}
+
+function closeModal() {
+  if (!modalEl) return;
+  modalEl.classList.remove("open");
+  modalEl.setAttribute("aria-hidden", "true");
 }
 
 async function runRelationship() {
@@ -67,6 +81,7 @@ async function runRelationship() {
     parsedEl.textContent = JSON.stringify(data.parsed, null, 2);
     diagramEl.textContent = data.diagram || "";
     setStatus("Done.");
+    openModal();
   } catch (error) {
     setStatus("Network error. Please try again.", true);
   } finally {
@@ -79,3 +94,13 @@ Array.from(document.querySelectorAll("input[name='selected']")).forEach(
 );
 
 submitBtn.addEventListener("click", runRelationship);
+
+closeButtons.forEach((button) => {
+  button.addEventListener("click", closeModal);
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    closeModal();
+  }
+});

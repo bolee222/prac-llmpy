@@ -8,6 +8,7 @@ import os
 from pathlib import Path
 
 from flask import Flask, jsonify, render_template, request, send_from_directory
+from flask import abort
 from openai import OpenAI
 
 from diagram import json2diagram
@@ -120,8 +121,24 @@ def asset_file(filename: str):
 
 
 @app.route("/")
-def index() -> str:
+def gallery_selector() -> str:
+    return render_template("gallery_select.html")
+
+
+@app.route("/gallery/<int:gallery_id>")
+def index(gallery_id: int) -> str:
+    if gallery_id not in (1, 2):
+        abort(404)
+
     image_data = load_image_data()
+    prefix = f"{gallery_id}-"
+    filtered_items = [
+        (image_id, row)
+        for image_id, row in image_data.items()
+        if row["filename"].startswith(prefix)
+    ]
+    filtered_items.sort(key=lambda item: item[1]["filename"])
+
     cards = [
         {
             "id": image_id,
@@ -130,9 +147,9 @@ def index() -> str:
             "description": row["description"],
             "url": build_image_url(row["filename"]),
         }
-        for image_id, row in image_data.items()
+        for image_id, row in filtered_items[:5]
     ]
-    return render_template("index.html", cards=cards)
+    return render_template("index.html", cards=cards, gallery_id=gallery_id)
 
 
 @app.post("/api/relationship")

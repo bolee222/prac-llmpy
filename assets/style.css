@@ -14,8 +14,22 @@ header {
   margin: 0 auto 24px;
 }
 
+.header-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
 h1 {
   margin-bottom: 8px;
+}
+
+.gallery-label {
+  margin: 0;
+  font-weight: 600;
+  color: #2563eb;
 }
 
 main {
@@ -24,6 +38,32 @@ main {
   display: flex;
   flex-direction: column;
   gap: 24px;
+}
+
+.gallery-selection {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.selection-card {
+  text-decoration: none;
+  background: #fff;
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+  color: inherit;
+  border: 2px solid transparent;
+  transition: border 0.2s ease, transform 0.2s ease;
+}
+
+.selection-card:hover {
+  border-color: #2563eb;
+  transform: translateY(-3px);
+}
+
+.selection-card h2 {
+  margin-top: 0;
 }
 
 .gallery {
@@ -99,6 +139,15 @@ button {
   cursor: pointer;
 }
 
+.link-button {
+  text-decoration: none;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid #2563eb;
+  color: #2563eb;
+  font-weight: 600;
+}
+
 button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
@@ -113,17 +162,80 @@ button:disabled {
   color: #dc2626;
 }
 
-.output {
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal.open {
+  display: flex;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.5);
+}
+
+.modal-content {
+  position: relative;
+  background: #fff;
+  border-radius: 20px;
+  padding: 24px;
+  max-width: 860px;
+  width: min(90vw, 860px);
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.2);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.modal-close {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #1f2937;
+}
+
+.modal-body {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 16px;
 }
 
-.output pre {
+.modal-section pre {
   background: #0f172a;
   color: #e2e8f0;
   padding: 16px;
   border-radius: 12px;
   overflow-x: auto;
   min-height: 120px;
+}
+
+.message-box {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.message-box h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.message-box p {
+  margin: 0;
+  white-space: pre-wrap;
 }
