@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Image Relationship Explorer</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Image Relationship Explorer</h1>
+      <p>Select two images, add your prompt, and generate a relationship diagram.</p>
+    </header>
+
+    <main>
+      <section class="gallery">
+        {% for card in cards %}
+        <label class="card">
+          <input type="checkbox" name="selected" value="{{ card.id }}" />
+          <img src="{{ card.url }}" alt="{{ card.title }}" />
+          <div class="card-body">
+            <h3>{{ card.title }}</h3>
+            <p>{{ card.description }}</p>
+          </div>
+        </label>
+        {% endfor %}
+      </section>
+
+      <section class="controls">
+        <div class="prompt">
+          <label for="prompt">Prompt</label>
+          <textarea id="prompt" placeholder="Enter the prompt you want to run..."></textarea>
+        </div>
+        <button id="submit" type="button">Run Relationship</button>
+        <p id="status" role="status"></p>
+      </section>
+
+      <section class="output">
+        <div>
+          <h2>Relationship Text</h2>
+          <pre id="relationship"></pre>
+        </div>
+        <div>
+          <h2>Parsed JSON</h2>
+          <pre id="parsed"></pre>
+        </div>
+        <div>
+          <h2>Diagram Output</h2>
+          <pre id="diagram"></pre>
+        </div>
+      </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
