@@ -47,7 +47,8 @@ function clearSelections() {
 
 function filterGallery(galleryId) {
   cards.forEach((card) => {
-    const isMatch = card.dataset.gallery === galleryId;
+    const filename = card.dataset.filename || "";
+    const isMatch = filename.startsWith(`${galleryId}-`);
     card.hidden = !isMatch;
     const checkbox = card.querySelector("input[name='selected']");
     if (checkbox) {

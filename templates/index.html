@@ -6,7 +6,7 @@
     <title>Image Relationship Explorer</title>
     <link rel="stylesheet" href="/assets/style.css" />
   </head>
-  <body>
+  <body class="selection-only">
     <header>
       <h1>Image Relationship Explorer</h1>
       <p>Select two images, add your prompt, and generate a relationship diagram.</p>
@@ -29,7 +29,7 @@
         </div>
         <section class="gallery">
           {% for card in cards %}
-          <label class="card" data-gallery="{{ card.gallery }}">
+          <label class="card" data-filename="{{ card.filename }}">
             <input type="checkbox" name="selected" value="{{ card.id }}" />
             <img src="{{ card.url }}" alt="{{ card.title }}" />
             <div class="card-body">
