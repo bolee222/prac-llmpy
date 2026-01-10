@@ -57,6 +57,7 @@ function showGallery(galleryId) {
   galleryLabel.textContent = `Gallery ${galleryId}`;
   selectionScreen.hidden = true;
   galleryView.hidden = false;
+  document.body.classList.remove("selection-only");
   setStatus("");
   clearSelections();
   resetOutput();
@@ -65,6 +66,7 @@ function showGallery(galleryId) {
 function showSelection() {
   selectionScreen.hidden = false;
   galleryView.hidden = true;
+  document.body.classList.add("selection-only");
   setStatus("");
   clearSelections();
   resetOutput();

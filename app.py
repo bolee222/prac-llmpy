@@ -86,7 +86,7 @@ def load_image_data() -> dict[str, dict[str, str]]:
             row = normalize_row(raw_row)
             artist = row.get("Artist", "Unknown artist")
             title = row.get("Title", "Untitled")
-            filename = filename_for_artist(artist, counts)
+            filename = row.get("Artwork") or filename_for_artist(artist, counts)
             data[str(index)] = {
                 "id": str(index),
                 "filename": filename,

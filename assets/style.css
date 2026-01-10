@@ -9,6 +9,12 @@ body {
   padding: 32px;
 }
 
+body.selection-only header,
+body.selection-only .selection h2,
+body.selection-only .selection p {
+  display: none;
+}
+
 header {
   max-width: 960px;
   margin: 0 auto 24px;
