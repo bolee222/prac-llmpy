@@ -22,14 +22,20 @@ header {
   gap: 16px;
 }
 
+.header-row--gallery {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
 h1 {
   margin-bottom: 8px;
 }
 
 .gallery-label {
-  margin: 0;
-  font-weight: 600;
-  color: #2563eb;
+  max-width: 1100px;
+  margin: 0 auto;
+  font-weight: 400;
+  color: #64748b;
 }
 
 main {
@@ -161,6 +167,12 @@ button {
   border: 1px solid #2563eb;
   color: #2563eb;
   font-weight: 600;
+}
+
+.link-button--gallery {
+  border-color: #cbd5f5;
+  color: #64748b;
+  font-weight: 500;
 }
 
 button:disabled {
